@@ -1,0 +1,27 @@
+name: "label-closed-pull-request"
+
+on:
+    pull_request:
+        types: [closed]
+
+jobs:
+    automate-issues-labels:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Closed Labeling
+              if: github.event.pull_request.merged == false
+
+              uses: andymckay/labeler@master
+
+              with:
+                  add-labels: "done"
+                  remove-labels: "awaiting review, complete"
+
+            - name: Merged Labeling
+              if: github.event.pull_request.merged == true
+
+              uses: andymckay/labeler@master
+
+              with:
+                  add-labels: "complete"
+                  remove-labels: "awaiting review, done"
