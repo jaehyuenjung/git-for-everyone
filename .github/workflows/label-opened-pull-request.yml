@@ -1,0 +1,16 @@
+name: "label-opened-pull-request"
+
+on:
+    pull_request:
+        types: [opened]
+
+jobs:
+    automate-issues-labels:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Opened Labeling
+
+              uses: andymckay/labeler@master
+
+              with:
+                  add-labels: "awaiting review"
